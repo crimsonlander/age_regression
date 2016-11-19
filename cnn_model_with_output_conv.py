@@ -35,7 +35,7 @@ def cnn(X, keep_prob):
     X = conv_highway(X, 256)
     X = tf.reduce_mean(X, [1, 2])
     X = fully_connected_highway(X, 256, keep_prob=keep_prob)
-    Wy = tf.Variable(np.array([[[0.1]], [[0.2]], [[0.6]], [[0.2]], [[0.1]]], dtype=np.float32))  # [ 0.15294118,  0.69803922,  0.14901961]
+    Wy = tf.Variable(np.array([[[0.1]], [[0.2]], [[0.6]], [[0.2]], [[0.1]]], dtype=np.float32))
     y = fully_connected(X, 20, activation_fn=None)
     y = tf.expand_dims(y, 2)
     y = tf.nn.conv1d(y, Wy, 2, 'VALID')
