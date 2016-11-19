@@ -3,5 +3,5 @@ from cnn_model_with_output_conv import CNNModel
 
 model = CNNModel()
 
-train_model(model, "cnn_model_3", 20)
-#test_model(model, "cnn_model_3")
+train_model(model, "cnn_model_with_output_conv", 20)
+test_model(model, "cnn_model_with_output_conv")
