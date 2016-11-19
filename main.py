@@ -1,5 +1,5 @@
 from model_utils import train_model, test_model
-from cnn_model_3 import CNNModel
+from cnn_model_with_output_conv import CNNModel
 
 model = CNNModel()
 

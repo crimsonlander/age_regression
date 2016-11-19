@@ -35,22 +35,13 @@ def cnn(X, keep_prob):
     X = conv_highway(X, 256)
     X = tf.reduce_mean(X, [1, 2])
     X = fully_connected_highway(X, 256, keep_prob=keep_prob)
-    y = fully_connected(X, 8, activation_fn=None)
+    Wy = tf.Variable(np.array([[[0.1]], [[0.2]], [[0.6]], [[0.2]], [[0.1]]], dtype=np.float32))  # [ 0.15294118,  0.69803922,  0.14901961]
+    y = fully_connected(X, 20, activation_fn=None)
+    y = tf.expand_dims(y, 2)
+    y = tf.nn.conv1d(y, Wy, 2, 'VALID')
+    y = tf.squeeze(y, [2])
+
     g = fully_connected(X, 2, activation_fn=None)
-
-    return y, g
-
-
-def cnn_simple(X):
-    X = convolution2d(X, 64, (5, 5), 2, biases_initializer=tf.constant_initializer(2.), activation_fn=tf.nn.tanh)
-    X = max_pool2d(X, (2, 2), 2, 'SAME')
-    X = convolution2d(X, 64, (3, 3))
-    X = max_pool2d(X, (2, 2), 2, 'SAME')
-    X = convolution2d(X, 64, (3, 3))
-    X = tf.reduce_mean(X, [1, 2])
-    X = fully_connected(X, 64, activation_fn=tf.nn.sigmoid)
-    y = fully_connected(X, 8, activation_fn=tf.identity)
-    g = fully_connected(X, 2, activation_fn=tf.identity)
 
     return y, g
 
